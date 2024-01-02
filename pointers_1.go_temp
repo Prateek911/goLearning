@@ -1,0 +1,45 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+// Function to calculate the sum of a large array passed by value
+func sumByValue(arr [1000000]int) int {
+	sum := 0
+	for _, v := range arr {
+		sum += v
+	}
+	return sum
+}
+
+// Function to calculate the sum of a large array passed by pointer
+func sumByPointer(arr *[1000000]int) int {
+	sum := 0
+	for _, v := range arr {
+		sum += v
+	}
+	return sum
+}
+
+func main() {
+	// Create a large array
+	var arr [1000000]int
+
+	for i := 0; i < len(arr); i++ {
+		arr[i] = i
+	}
+
+	// Measure time taken by sumByValue
+	start := time.Now()
+	sumValue := sumByValue(arr)
+	fmt.Println("Sum by value:", sumValue)
+	fmt.Println("Time taken by sumByValue:", time.Since(start))
+
+	// Measure time taken by sumByPointer
+	start = time.Now()
+	sumPointer := sumByPointer(&arr)
+	fmt.Println("Sum by pointer:", sumPointer)
+	fmt.Println("Time taken by sumByPointer:", time.Since(start))
+}
