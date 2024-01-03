@@ -1,0 +1,31 @@
+package main
+
+import "fmt"
+
+type Shape interface {
+	area() float64
+	perimeter() float64
+}
+
+type Rectangle struct {
+	length float64
+	width  float64
+}
+
+func (r *Rectangle) area() float64 {
+	return r.length * r.width
+}
+
+func (r *Rectangle) perimeter() float64 {
+	return 2 * (r.length + r.width)
+}
+
+func printDetails(s Shape) {
+	fmt.Println("Area is: ", s.area())
+	fmt.Println("Permiter is: ", s.perimeter())
+}
+
+func main() {
+	rect := &Rectangle{length: 5.00, width: 6.00}
+	printDetails(rect)
+}
