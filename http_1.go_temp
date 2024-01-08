@@ -1,0 +1,21 @@
+package main
+
+import (
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+)
+
+func main() {
+	url := "https://www.google.com"
+	resp, err := http.Get(url)
+	if err != nil {
+		fmt.Println("errors :", err)
+		os.Exit(1)
+	}
+	defer resp.Body.Close()
+
+	io.Copy(os.Stdout, resp.Body)
+
+}
